@@ -85,9 +85,10 @@ class PostService {
       return { ...post };
     }
     return null;
+return null;
   }
 
-async search(query) {
+  async search(query) {
     await delay(300);
     if (!query.trim()) return [];
     
@@ -96,7 +97,7 @@ async search(query) {
         post.content.toLowerCase().includes(query.toLowerCase())
       )
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      .slice(0, 20)
+.slice(0, 20)
       .map(post => ({ ...post }));
   }
 
