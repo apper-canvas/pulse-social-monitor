@@ -79,13 +79,12 @@ class PostService {
 
   async unlikePost(id) {
     await delay(200);
-    const post = this.posts.find(p => p.id === id);
+const post = this.posts.find(p => p.id === id);
     if (post) {
       post.likeCount = Math.max(0, post.likeCount - 1);
       return { ...post };
     }
     return null;
-return null;
   }
 
   async search(query) {
@@ -97,7 +96,7 @@ return null;
         post.content.toLowerCase().includes(query.toLowerCase())
       )
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-.slice(0, 20)
+      .slice(0, 20)
       .map(post => ({ ...post }));
   }
 
@@ -120,5 +119,6 @@ return null;
     }
     return null;
   }
+}
 
 export default new PostService();
