@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import ApperIcon from '../ApperIcon';
@@ -14,7 +14,7 @@ const CreatePostModal = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
-  React.useEffect(() => {
+useEffect(() => {
     const loadCurrentUser = async () => {
       try {
         const user = await userService.getCurrentUser();
