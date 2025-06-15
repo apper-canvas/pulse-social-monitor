@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import React, { useMemo } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const RichTextEditor = ({ 
   value, 
@@ -51,57 +51,70 @@ const RichTextEditor = ({
         formats={formats}
         style={{
           backgroundColor: 'transparent',
-          color: 'white',
+          color: 'white'
         }}
         {...props}
       />
-      <style jsx global>{`
-        .ql-editor {
-          background-color: transparent !important;
-          color: white !important;
+      <style>
+      {`:root {
+        --ql-editor-bg: transparent;
+        --ql-editor-color: white;
+        --ql-placeholder-color: #9CA3AF;
+        --ql-toolbar-border: #374151;
+        --ql-icon-color: #9CA3AF;
+        --ql-icon-hover: white;
+        --ql-icon-active: #3B82F6;
+      }`}
+    </style>
+    <style dangerouslySetInnerHTML={{
+      __html: `
+        .rich-text-editor .ql-editor {
+          background-color: var(--ql-editor-bg) !important;
+          color: var(--ql-editor-color) !important;
           font-size: 1.25rem !important;
           line-height: 1.6 !important;
           padding: 0 !important;
           border: none !important;
         }
-        .ql-editor::before {
-          color: #9CA3AF !important;
+        .rich-text-editor .ql-editor::before {
+          color: var(--ql-placeholder-color) !important;
           font-style: normal !important;
         }
-        .ql-toolbar {
+        .rich-text-editor .ql-toolbar {
           border: none !important;
-          border-bottom: 1px solid #374151 !important;
-          background-color: transparent !important;
+          border-bottom: 1px solid var(--ql-toolbar-border) !important;
+          background-color: var(--ql-editor-bg) !important;
           margin-bottom: 1rem !important;
         }
-        .ql-toolbar .ql-stroke {
-          stroke: #9CA3AF !important;
+        .rich-text-editor .ql-toolbar .ql-stroke {
+          stroke: var(--ql-icon-color) !important;
         }
-        .ql-toolbar .ql-fill {
-          fill: #9CA3AF !important;
+        .rich-text-editor .ql-toolbar .ql-fill {
+          fill: var(--ql-icon-color) !important;
         }
-        .ql-toolbar button:hover .ql-stroke {
-          stroke: white !important;
+        .rich-text-editor .ql-toolbar button:hover .ql-stroke {
+          stroke: var(--ql-icon-hover) !important;
         }
-        .ql-toolbar button:hover .ql-fill {
-          fill: white !important;
+        .rich-text-editor .ql-toolbar button:hover .ql-fill {
+          fill: var(--ql-icon-hover) !important;
         }
-        .ql-toolbar button.ql-active .ql-stroke {
-          stroke: #3B82F6 !important;
+        .rich-text-editor .ql-toolbar button.ql-active .ql-stroke {
+          stroke: var(--ql-icon-active) !important;
         }
-        .ql-toolbar button.ql-active .ql-fill {
-          fill: #3B82F6 !important;
+        .rich-text-editor .ql-toolbar button.ql-active .ql-fill {
+          fill: var(--ql-icon-active) !important;
         }
-        .ql-container {
+        .rich-text-editor .ql-container {
           border: none !important;
           font-family: inherit !important;
         }
         .rich-text-editor .ql-editor p {
           margin: 0 !important;
         }
-      `}</style>
-    </div>
-  );
+      `
+    }} />
+  </div>
+);
 };
 
 export default RichTextEditor;
