@@ -82,12 +82,12 @@ const CommentItem = ({ comment, onDeleted, onUpdated }) => {
 
   if (!user) {
     return (
-      <div className="flex space-x-3 animate-pulse">
-        <div className="w-8 h-8 bg-gray-700 rounded-full"></div>
+<div className="flex space-x-3 animate-pulse">
+        <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
         <div className="flex-1 space-y-2">
-          <div className="h-3 bg-gray-700 rounded w-20"></div>
-          <div className="h-4 bg-gray-700 rounded w-full"></div>
-          <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+          <div className="h-3 bg-gray-200 rounded w-20"></div>
+          <div className="h-4 bg-gray-200 rounded w-full"></div>
+          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
         </div>
       </div>
     );
@@ -107,7 +107,7 @@ const CommentItem = ({ comment, onDeleted, onUpdated }) => {
       
       <div className="flex-1 min-w-0">
         <div className="flex items-center space-x-2 mb-1">
-          <Text variant="caption" className="text-white font-medium">
+<Text variant="caption" className="text-gray-900 font-medium">
             {user.displayName}
           </Text>
           <Text variant="caption" color="muted">
@@ -121,8 +121,8 @@ const CommentItem = ({ comment, onDeleted, onUpdated }) => {
           </Text>
         </div>
         
-        <div 
-          className="text-gray-200 text-sm leading-relaxed break-words prose prose-invert prose-sm max-w-none"
+<div 
+          className="text-gray-700 text-sm leading-relaxed break-words prose prose-gray prose-sm max-w-none"
           dangerouslySetInnerHTML={{ 
             __html: comment.content?.replace(
               /#(\w+)/g, 

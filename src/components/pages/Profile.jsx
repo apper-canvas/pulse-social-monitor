@@ -89,21 +89,21 @@ const Profile = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+<div className="min-h-screen bg-white">
         <div className="max-w-4xl mx-auto px-4 py-6">
           <div className="glass rounded-xl p-8 animate-pulse">
             <div className="flex items-center space-x-6 mb-6">
-              <div className="w-20 h-20 bg-gray-700 rounded-full"></div>
+<div className="w-20 h-20 bg-gray-200 rounded-full"></div>
               <div className="flex-1 space-y-3">
-                <div className="h-6 bg-gray-700 rounded w-48"></div>
-                <div className="h-4 bg-gray-700 rounded w-32"></div>
-                <div className="h-4 bg-gray-700 rounded w-full"></div>
+<div className="h-6 bg-gray-200 rounded w-48"></div>
+                <div className="h-4 bg-gray-200 rounded w-32"></div>
+                <div className="h-4 bg-gray-200 rounded w-full"></div>
               </div>
             </div>
             <div className="flex space-x-8">
-              <div className="h-4 bg-gray-700 rounded w-20"></div>
-              <div className="h-4 bg-gray-700 rounded w-20"></div>
-              <div className="h-4 bg-gray-700 rounded w-20"></div>
+<div className="h-4 bg-gray-200 rounded w-20"></div>
+              <div className="h-4 bg-gray-200 rounded w-20"></div>
+              <div className="h-4 bg-gray-200 rounded w-20"></div>
             </div>
           </div>
         </div>
@@ -113,7 +113,7 @@ const Profile = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+<div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -121,7 +121,7 @@ const Profile = () => {
             className="glass rounded-xl p-8"
           >
             <ApperIcon name="UserX" className="w-16 h-16 text-error mx-auto mb-4" />
-            <Text variant="subheading" className="text-white mb-2">
+<Text variant="subheading" className="text-gray-900 mb-2">
               {error}
             </Text>
             <Text color="muted">
@@ -136,7 +136,7 @@ const Profile = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-background">
+<div className="min-h-screen bg-white">
       <div className="max-w-4xl mx-auto px-4 py-6">
         {/* Profile Header */}
         <motion.div
@@ -148,14 +148,14 @@ const Profile = () => {
             <div className="flex items-center space-x-6">
               <Avatar src={user.avatar} alt={user.displayName} size="2xl" />
               <div className="flex-1">
-                <Text variant="heading" size="xl" className="text-white mb-1">
+<Text variant="heading" size="xl" className="text-gray-900 mb-1">
                   {user.displayName}
                 </Text>
                 <Text color="muted" className="mb-3">
                   @{user.username}
                 </Text>
                 {user.bio && (
-                  <Text className="text-white leading-relaxed break-words">
+<Text className="text-gray-900 leading-relaxed break-words">
                     {user.bio}
                   </Text>
                 )}
@@ -177,7 +177,7 @@ const Profile = () => {
           {/* Stats */}
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2">
-              <Text variant="label" className="text-white">
+<Text variant="label" className="text-gray-900">
                 {user.postsCount}
               </Text>
               <Text color="muted">
@@ -185,7 +185,7 @@ const Profile = () => {
               </Text>
             </div>
             <div className="flex items-center space-x-2">
-              <Text variant="label" className="text-white">
+<Text variant="label" className="text-gray-900">
                 {user.followersCount}
               </Text>
               <Text color="muted">
@@ -193,7 +193,7 @@ const Profile = () => {
               </Text>
             </div>
             <div className="flex items-center space-x-2">
-              <Text variant="label" className="text-white">
+<Text variant="label" className="text-gray-900">
                 {user.followingCount}
               </Text>
               <Text color="muted">
@@ -209,7 +209,7 @@ const Profile = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <Text variant="subheading" className="text-white mb-6">
+<Text variant="subheading" className="text-gray-900 mb-6">
             Posts
           </Text>
           
@@ -218,15 +218,15 @@ const Profile = () => {
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="glass rounded-xl p-6 animate-pulse">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="w-10 h-10 bg-gray-700 rounded-full"></div>
+<div className="w-10 h-10 bg-gray-200 rounded-full"></div>
                     <div className="space-y-2">
-                      <div className="h-4 bg-gray-700 rounded w-24"></div>
-                      <div className="h-3 bg-gray-700 rounded w-16"></div>
+<div className="h-4 bg-gray-200 rounded w-24"></div>
+                      <div className="h-3 bg-gray-200 rounded w-16"></div>
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <div className="h-4 bg-gray-700 rounded w-full"></div>
-                    <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+<div className="h-4 bg-gray-200 rounded w-full"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
                   </div>
                 </div>
               ))}
@@ -252,7 +252,7 @@ const Profile = () => {
                 className="glass rounded-xl p-8"
               >
                 <ApperIcon name="FileText" className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <Text variant="subheading" className="text-white mb-2">
+<Text variant="subheading" className="text-gray-900 mb-2">
                   No posts yet
                 </Text>
                 <Text color="muted">

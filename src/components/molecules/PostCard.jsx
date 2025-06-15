@@ -142,17 +142,17 @@ const handleShare = async () => {
 
   if (!user) {
     return (
-      <div className="glass rounded-xl p-6 animate-pulse">
+<div className="glass rounded-xl p-6 animate-pulse">
         <div className="flex items-center space-x-3 mb-4">
-          <div className="w-10 h-10 bg-gray-700 rounded-full"></div>
+          <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
           <div className="space-y-2">
-            <div className="h-4 bg-gray-700 rounded w-24"></div>
-            <div className="h-3 bg-gray-700 rounded w-16"></div>
+<div className="h-4 bg-gray-200 rounded w-24"></div>
+            <div className="h-3 bg-gray-200 rounded w-16"></div>
           </div>
         </div>
         <div className="space-y-3">
-          <div className="h-4 bg-gray-700 rounded w-full"></div>
-          <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+<div className="h-4 bg-gray-200 rounded w-full"></div>
+          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
         </div>
       </div>
     );
@@ -163,14 +163,14 @@ const handleShare = async () => {
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass rounded-xl p-6 hover:bg-gray-800/50 transition-all duration-300"
+className="glass rounded-xl p-6 hover:bg-gray-100/50 transition-all duration-300"
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
           <Avatar src={user.avatar} alt={user.displayName} />
           <div>
-            <Text variant="label" className="text-white">
+<Text variant="label" className="text-gray-900">
               {user.displayName}
             </Text>
             <Text variant="caption" color="muted">
@@ -179,7 +179,7 @@ const handleShare = async () => {
           </div>
         </div>
         
-        <button className="text-gray-400 hover:text-white transition-colors">
+<button className="text-gray-400 hover:text-gray-600 transition-colors">
           <ApperIcon name="MoreHorizontal" size={20} />
         </button>
       </div>
@@ -187,7 +187,7 @@ const handleShare = async () => {
 {/* Content */}
       <div className="mb-4">
         <div 
-          className="text-white leading-relaxed break-words prose prose-invert max-w-none"
+className="text-gray-700 leading-relaxed break-words prose prose-gray max-w-none"
           dangerouslySetInnerHTML={{ 
             __html: post.content?.replace(
               /#(\w+)/g, 
@@ -229,7 +229,7 @@ const handleShare = async () => {
       )}
 
       {/* Actions */}
-      <div className="flex items-center justify-between pt-4 border-t border-gray-700">
+<div className="flex items-center justify-between pt-4 border-t border-gray-200">
         <div className="flex items-center space-x-6">
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -269,7 +269,7 @@ const handleShare = async () => {
           </button>
         </div>
 
-        <button className="text-gray-400 hover:text-white transition-colors">
+<button className="text-gray-400 hover:text-gray-600 transition-colors">
           <ApperIcon name="Bookmark" size={20} />
 </button>
       </div>
@@ -280,7 +280,7 @@ const handleShare = async () => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="mt-4 pt-4 border-t border-gray-700"
+className="mt-4 pt-4 border-t border-gray-200"
         >
           <CommentsList 
             postId={post.id} 

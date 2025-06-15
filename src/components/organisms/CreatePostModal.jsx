@@ -173,14 +173,14 @@ const newPost = await postService.create({
             }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <div
-                className="bg-surface rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+className="bg-white border border-gray-200 rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
                 {/* Header */}
                 <div
-                    className="flex items-center justify-between p-6 border-b border-gray-700">
-                    <Text variant="subheading" className="text-white">Create Post
+className="flex items-center justify-between p-6 border-b border-gray-200">
+<Text variant="subheading" className="text-gray-900">Create Post
                                         </Text>
                     <button
-                        onClick={onClose}
+className="text-gray-400 hover:text-gray-600 transition-colors">
                         className="text-gray-400 hover:text-white transition-colors">
                         <ApperIcon name="X" size={24} />
                     </button>
@@ -206,7 +206,7 @@ const newPost = await postService.create({
                         </div>
                     </div>
                     {/* Media Preview */}
-                    {processingVideo && <div className="mb-4 p-4 bg-gray-800 rounded-lg">
+{processingVideo && <div className="mb-4 p-4 bg-gray-100 rounded-lg">
                         <div className="flex items-center space-x-3">
                             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
                             <Text color="muted">Processing video and generating thumbnail...</Text>
@@ -236,10 +236,10 @@ const newPost = await postService.create({
                     </div>}
                     {/* Actions */}
                     <div
-                        className="flex items-center justify-between pt-4 border-t border-gray-700">
+className="flex items-center justify-between pt-4 border-t border-gray-200">
                         <div className="flex items-center space-x-4">
                             <label
-                                className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
                                 title="Upload Image">
                                 <ApperIcon name="Image" size={20} />
                                 <input
@@ -250,7 +250,7 @@ const newPost = await postService.create({
                                     disabled={processingVideo} />
                             </label>
                             <label
-                                className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
                                 title="Upload Video">
                                 <ApperIcon name="Video" size={20} />
                                 <input

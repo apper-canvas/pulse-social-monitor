@@ -6,7 +6,7 @@ import { routeArray } from './config/routes';
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-background text-white">
+<div className="min-h-screen bg-background text-gray-900">
         <Routes>
           <Route path="/" element={<Layout />}>
             {routeArray.map((route) => (
@@ -29,8 +29,8 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="dark"
-          toastClassName="!bg-surface !text-white !border !border-gray-700"
+theme="light"
+          toastClassName="!bg-surface !text-gray-900 !border !border-gray-200"
           progressClassName="!bg-gradient-to-r !from-primary !to-accent"
           className="z-[9999]"
         />

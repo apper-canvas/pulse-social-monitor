@@ -102,16 +102,16 @@ const Notifications = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+<div className="min-h-screen bg-white">
         <div className="max-w-2xl mx-auto px-4 py-6">
           <div className="space-y-4">
             {[...Array(5)].map((_, i) => (
-              <div key={i} className="glass rounded-xl p-4 animate-pulse">
+<div key={i} className="glass rounded-xl p-4 animate-pulse">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gray-700 rounded-full"></div>
+<div className="w-10 h-10 bg-gray-200 rounded-full"></div>
                   <div className="flex-1 space-y-2">
-                    <div className="h-4 bg-gray-700 rounded w-3/4"></div>
-                    <div className="h-3 bg-gray-700 rounded w-1/2"></div>
+<div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
                   </div>
                 </div>
               </div>
@@ -124,7 +124,7 @@ const Notifications = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+<div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -132,7 +132,7 @@ const Notifications = () => {
             className="glass rounded-xl p-8"
           >
             <ApperIcon name="AlertCircle" className="w-16 h-16 text-error mx-auto mb-4" />
-            <Text variant="subheading" className="text-white mb-2">
+<Text variant="subheading" className="text-gray-900 mb-2">
               Something went wrong
             </Text>
             <Text color="muted" className="mb-4">
@@ -148,7 +148,7 @@ const Notifications = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+<div className="min-h-screen bg-white">
       <div className="max-w-2xl mx-auto px-4 py-6">
         {/* Header */}
         <motion.div
@@ -191,7 +191,7 @@ const Notifications = () => {
               >
                 <ApperIcon name="Bell" className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               </motion.div>
-              <Text variant="subheading" className="text-white mb-2">
+<Text variant="subheading" className="text-gray-900 mb-2">
                 No notifications yet
               </Text>
               <Text color="muted">
@@ -221,13 +221,13 @@ const Notifications = () => {
                   <div className="flex items-center space-x-4">
                     <div className="relative">
                       <Avatar src={actor.avatar} alt={actor.displayName} />
-                      <div className={`absolute -bottom-1 -right-1 w-6 h-6 bg-surface rounded-full flex items-center justify-center ${icon.color}`}>
+<div className={`absolute -bottom-1 -right-1 w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center ${icon.color}`}>
                         <ApperIcon name={icon.name} size={12} />
                       </div>
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                      <Text className="text-white break-words">
+<Text className="text-gray-900 break-words">
                         {getNotificationText(notification)}
                       </Text>
                       <Text variant="caption" color="muted">

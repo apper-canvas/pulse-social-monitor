@@ -25,9 +25,9 @@ const Text = ({
   };
 
   const colors = {
-    white: 'text-white',
-    gray: 'text-gray-300',
-    muted: 'text-gray-400',
+white: 'text-gray-900',
+    gray: 'text-gray-600',
+    muted: 'text-gray-500',
     primary: 'text-primary',
     secondary: 'text-secondary',
     accent: 'text-accent',

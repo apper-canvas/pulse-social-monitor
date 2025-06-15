@@ -10,14 +10,14 @@ const Input = ({
   containerClassName = '',
   ...props 
 }) => {
-  const inputClasses = `w-full bg-surface border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 ${
+const inputClasses = `w-full bg-surface border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 ${
     icon ? 'pl-12' : ''
   } ${error ? 'border-error' : ''} ${className}`;
 
   return (
     <div className={`space-y-2 ${containerClassName}`}>
       {label && (
-        <label className="block text-sm font-medium text-gray-300">
+<label className="block text-sm font-medium text-gray-700">
           {label}
         </label>
       )}

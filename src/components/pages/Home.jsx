@@ -4,7 +4,7 @@ import Text from '../atoms/Text';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-background">
+<div className="min-h-screen bg-white">
       <div className="max-w-4xl mx-auto px-4 py-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}

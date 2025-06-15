@@ -50,16 +50,16 @@ const PostFeed = ({ variant = 'home' }) => {
             className="glass rounded-xl p-6 animate-pulse"
           >
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gray-700 rounded-full"></div>
+<div className="w-10 h-10 bg-gray-200 rounded-full"></div>
               <div className="space-y-2">
-                <div className="h-4 bg-gray-700 rounded w-24"></div>
-                <div className="h-3 bg-gray-700 rounded w-16"></div>
+<div className="h-4 bg-gray-200 rounded w-24"></div>
+                <div className="h-3 bg-gray-200 rounded w-16"></div>
               </div>
             </div>
             <div className="space-y-3">
-              <div className="h-4 bg-gray-700 rounded w-full"></div>
-              <div className="h-4 bg-gray-700 rounded w-3/4"></div>
-              <div className="h-32 bg-gray-700 rounded"></div>
+<div className="h-4 bg-gray-200 rounded w-full"></div>
+              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+              <div className="h-32 bg-gray-200 rounded"></div>
             </div>
           </motion.div>
         ))}
@@ -76,7 +76,7 @@ const PostFeed = ({ variant = 'home' }) => {
           className="glass rounded-xl p-8"
         >
           <ApperIcon name="AlertCircle" className="w-12 h-12 text-error mx-auto mb-4" />
-          <Text variant="subheading" className="text-white mb-2">
+<Text variant="subheading" className="text-gray-900 mb-2">
             Oops! Something went wrong
           </Text>
           <Text color="muted" className="mb-4">
@@ -107,7 +107,7 @@ const PostFeed = ({ variant = 'home' }) => {
           >
             <ApperIcon name="MessageSquare" className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           </motion.div>
-          <Text variant="subheading" className="text-white mb-2">
+<Text variant="subheading" className="text-gray-900 mb-2">
             No posts yet
           </Text>
           <Text color="muted" className="mb-4">

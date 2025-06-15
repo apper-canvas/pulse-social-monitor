@@ -42,13 +42,13 @@ const UserCard = ({ user, onUpdate }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass rounded-xl p-6 hover:bg-gray-800/50 transition-all duration-300"
+className="glass rounded-xl p-6 hover:bg-gray-100/50 transition-all duration-300"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <Avatar src={user.avatar} alt={user.displayName} size="lg" />
           <div className="flex-1 min-w-0">
-            <Text variant="label" className="text-white">
+<Text variant="label" className="text-gray-900">
               {user.displayName}
             </Text>
             <Text variant="caption" color="muted" className="break-words">
@@ -61,7 +61,7 @@ const UserCard = ({ user, onUpdate }) => {
             )}
             <div className="flex items-center space-x-4 mt-2">
               <div className="flex items-center space-x-1">
-                <Text variant="caption" color="white">
+<Text variant="caption" color="gray">
                   {user.followersCount}
                 </Text>
                 <Text variant="caption" color="muted">
@@ -69,7 +69,7 @@ const UserCard = ({ user, onUpdate }) => {
                 </Text>
               </div>
               <div className="flex items-center space-x-1">
-                <Text variant="caption" color="white">
+<Text variant="caption" color="gray">
                   {user.followingCount}
                 </Text>
                 <Text variant="caption" color="muted">

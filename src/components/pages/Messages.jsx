@@ -90,15 +90,15 @@ const Messages = () => {
 
   if (loading) {
     return (
-      <div className="h-screen bg-background flex">
-        <div className="w-1/3 border-r border-gray-700 p-4">
+<div className="h-screen bg-white flex">
+<div className="w-1/3 border-r border-gray-200 p-4">
           <div className="space-y-4">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="flex items-center space-x-3 p-3 animate-pulse">
-                <div className="w-12 h-12 bg-gray-700 rounded-full"></div>
+<div className="w-12 h-12 bg-gray-200 rounded-full"></div>
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 bg-gray-700 rounded w-24"></div>
-                  <div className="h-3 bg-gray-700 rounded w-32"></div>
+<div className="h-4 bg-gray-200 rounded w-24"></div>
+                  <div className="h-3 bg-gray-200 rounded w-32"></div>
                 </div>
               </div>
             ))}
@@ -106,8 +106,8 @@ const Messages = () => {
         </div>
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
-            <div className="w-16 h-16 bg-gray-700 rounded-full mx-auto mb-4 animate-pulse"></div>
-            <div className="h-4 bg-gray-700 rounded w-32 mx-auto"></div>
+<div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4 animate-pulse"></div>
+            <div className="h-4 bg-gray-200 rounded w-32 mx-auto"></div>
           </div>
         </div>
       </div>
@@ -115,11 +115,11 @@ const Messages = () => {
   }
 
   return (
-    <div className="h-screen bg-background flex overflow-hidden">
+<div className="h-screen bg-white flex overflow-hidden">
       {/* Conversations List */}
-      <div className="w-1/3 border-r border-gray-700 flex flex-col">
-        <div className="p-4 border-b border-gray-700">
-          <Text variant="heading" size="lg" className="text-white">
+<div className="w-1/3 border-r border-gray-200 flex flex-col">
+        <div className="p-4 border-b border-gray-200">
+          <Text variant="heading" size="lg" className="text-gray-900">
             Messages
           </Text>
         </div>
@@ -141,19 +141,19 @@ const Messages = () => {
                 return (
                   <motion.button
                     key={otherUserId}
-                    whileHover={{ backgroundColor: 'rgba(55, 65, 81, 0.5)' }}
+whileHover={{ backgroundColor: 'rgba(243, 244, 246, 0.5)' }}
                     onClick={() => loadConversation(otherUserId)}
                     className={`w-full flex items-center space-x-3 p-3 rounded-lg text-left transition-all ${
-                      selectedConversation === otherUserId ? 'bg-gray-800' : ''
+selectedConversation === otherUserId ? 'bg-gray-100' : ''
                     }`}
                   >
                     <div className="relative">
                       <Avatar src={otherUser.avatar} alt={otherUser.displayName} />
-                      <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-success rounded-full border-2 border-surface"></div>
+<div className="absolute -bottom-1 -right-1 w-4 h-4 bg-success rounded-full border-2 border-white"></div>
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <Text variant="label" className="text-white truncate">
+<Text variant="label" className="text-gray-900 truncate">
                           {otherUser.displayName}
                         </Text>
                         <Text variant="caption" color="muted">
@@ -177,13 +177,13 @@ const Messages = () => {
         {selectedConversation ? (
           <>
             {/* Chat Header */}
-            <div className="p-4 border-b border-gray-700 flex items-center space-x-3">
+<div className="p-4 border-b border-gray-200 flex items-center space-x-3">
               <Avatar 
                 src={users[selectedConversation]?.avatar} 
                 alt={users[selectedConversation]?.displayName} 
               />
               <div>
-                <Text variant="label" className="text-white">
+<Text variant="label" className="text-gray-900">
                   {users[selectedConversation]?.displayName}
                 </Text>
                 <div className="flex items-center space-x-1">
@@ -217,8 +217,8 @@ const Messages = () => {
                       )}
                       <div className={`px-4 py-2 rounded-2xl break-words ${
                         isOwnMessage 
-                          ? 'bg-gradient-to-r from-primary to-accent text-white' 
-                          : 'bg-surface text-white'
+? 'bg-gradient-to-r from-primary to-accent text-white' 
+                          : 'bg-surface text-gray-900'
                       }`}>
                         <Text size="sm">{message.content}</Text>
                       </div>
@@ -229,7 +229,7 @@ const Messages = () => {
             </div>
 
             {/* Message Input */}
-            <form onSubmit={sendMessage} className="p-4 border-t border-gray-700">
+<form onSubmit={sendMessage} className="p-4 border-t border-gray-200">
               <div className="flex items-center space-x-2">
                 <div className="flex-1">
                   <Input
@@ -262,7 +262,7 @@ const Messages = () => {
               >
                 <ApperIcon name="MessageSquare" className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               </motion.div>
-              <Text variant="subheading" className="text-white mb-2">
+<Text variant="subheading" className="text-gray-900 mb-2">
                 Select a conversation
               </Text>
               <Text color="muted">
