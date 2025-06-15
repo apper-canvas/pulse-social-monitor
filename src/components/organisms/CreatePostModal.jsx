@@ -7,14 +7,17 @@ import Avatar from '../atoms/Avatar';
 import Text from '../atoms/Text';
 import RichTextEditor from '../atoms/RichTextEditor';
 import { postService, userService } from '@/services';
+import { generateVideoThumbnail, validateVideoFile, formatDuration } from '@/utils/videoUtils';
 
 const CreatePostModal = ({ isOpen, onClose }) => {
   const [content, setContent] = useState('');
   const [mediaFile, setMediaFile] = useState(null);
   const [mediaPreview, setMediaPreview] = useState('');
+  const [videoThumbnail, setVideoThumbnail] = useState('');
+  const [videoDuration, setVideoDuration] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [processingVideo, setProcessingVideo] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-
 useEffect(() => {
     const loadCurrentUser = async () => {
       try {
@@ -27,24 +30,68 @@ useEffect(() => {
     loadCurrentUser();
   }, []);
 
-  const handleMediaUpload = (e) => {
+const handleMediaUpload = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error('File size must be less than 5MB');
-        return;
+    if (!file) return;
+
+    const isVideo = file.type.startsWith('video/');
+    const isImage = file.type.startsWith('image/');
+
+    if (!isVideo && !isImage) {
+      toast.error('Please select an image or video file');
+      return;
+    }
+
+    try {
+      if (isVideo) {
+        // Validate video file
+        await validateVideoFile(file);
+        
+        setProcessingVideo(true);
+        
+        // Generate thumbnail
+        const { thumbnailUrl, duration } = await generateVideoThumbnail(file);
+        
+        setMediaFile(file);
+        setVideoThumbnail(thumbnailUrl);
+        setVideoDuration(duration);
+        
+        // Set video file URL for preview
+        const videoUrl = URL.createObjectURL(file);
+        setMediaPreview(videoUrl);
+        
+        setProcessingVideo(false);
+      } else {
+        // Handle image upload (existing logic)
+        if (file.size > 5 * 1024 * 1024) {
+          toast.error('Image file size must be less than 5MB');
+          return;
+        }
+        
+        setMediaFile(file);
+        const reader = new FileReader();
+        reader.onload = (e) => setMediaPreview(e.target.result);
+        reader.readAsDataURL(file);
       }
-      
-      setMediaFile(file);
-      const reader = new FileReader();
-      reader.onload = (e) => setMediaPreview(e.target.result);
-      reader.readAsDataURL(file);
+    } catch (error) {
+      toast.error(error.message);
+      setProcessingVideo(false);
     }
   };
 
   const removeMedia = () => {
     setMediaFile(null);
     setMediaPreview('');
+    setVideoThumbnail('');
+    setVideoDuration(0);
+    
+    // Clean up object URLs
+    if (mediaPreview && mediaPreview.startsWith('blob:')) {
+      URL.revokeObjectURL(mediaPreview);
+    }
+    if (videoThumbnail && videoThumbnail.startsWith('blob:')) {
+      URL.revokeObjectURL(videoThumbnail);
+    }
   };
 
 const handleSubmit = async (e) => {
@@ -67,19 +114,20 @@ const handleSubmit = async (e) => {
         mediaUrl = 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop';
       }
 
-      const newPost = await postService.create({
+const newPost = await postService.create({
         userId: currentUser?.id || '1',
         content: content, // Store HTML content with formatting
         mediaUrl,
-        mediaType: mediaFile ? 'image' : ''
+        mediaType: mediaFile ? (mediaFile.type.startsWith('video/') ? 'video' : 'image') : '',
+        thumbnailUrl: videoThumbnail || '',
+        videoDuration: videoDuration || 0
       });
 
       toast.success('Post created successfully!');
       
-      // Reset form
+// Reset form
       setContent('');
-      setMediaFile(null);
-      setMediaPreview('');
+      removeMedia(); // Use removeMedia to clean up URLs
       onClose();
     } catch (error) {
       toast.error('Failed to create post');
@@ -142,14 +190,37 @@ const handleSubmit = async (e) => {
                   </div>
                 </div>
 
-                {/* Media Preview */}
-                {mediaPreview && (
+{/* Media Preview */}
+                {processingVideo && (
+                  <div className="mb-4 p-4 bg-gray-800 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
+                      <Text color="muted">Processing video and generating thumbnail...</Text>
+                    </div>
+                  </div>
+                )}
+                
+                {mediaPreview && !processingVideo && (
                   <div className="relative mb-4 rounded-lg overflow-hidden">
-                    <img
-                      src={mediaPreview}
-                      alt="Media preview"
-                      className="w-full h-auto max-h-64 object-cover"
-                    />
+                    {mediaFile?.type.startsWith('video/') ? (
+                      <div className="relative">
+                        <video
+                          src={mediaPreview}
+                          className="w-full h-auto max-h-64 object-cover"
+                          controls
+                          preload="metadata"
+                        />
+                        <div className="absolute bottom-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
+                          {formatDuration(videoDuration)}
+                        </div>
+                      </div>
+                    ) : (
+                      <img
+                        src={mediaPreview}
+                        alt="Media preview"
+                        className="w-full h-auto max-h-64 object-cover"
+                      />
+                    )}
                     <button
                       type="button"
                       onClick={removeMedia}
@@ -161,15 +232,26 @@ const handleSubmit = async (e) => {
                 )}
 
                 {/* Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-700">
-                  <div className="flex items-center space-x-2">
-                    <label className="text-gray-400 hover:text-white transition-colors cursor-pointer">
+<div className="flex items-center justify-between pt-4 border-t border-gray-700">
+                  <div className="flex items-center space-x-4">
+                    <label className="text-gray-400 hover:text-white transition-colors cursor-pointer" title="Upload Image">
                       <ApperIcon name="Image" size={20} />
                       <input
                         type="file"
                         accept="image/*"
                         onChange={handleMediaUpload}
                         className="hidden"
+                        disabled={processingVideo}
+                      />
+                    </label>
+                    <label className="text-gray-400 hover:text-white transition-colors cursor-pointer" title="Upload Video">
+                      <ApperIcon name="Video" size={20} />
+                      <input
+                        type="file"
+                        accept="video/mp4,video/webm,video/ogg,video/quicktime"
+                        onChange={handleMediaUpload}
+                        className="hidden"
+                        disabled={processingVideo}
                       />
                     </label>
                     <button
@@ -183,10 +265,10 @@ const handleSubmit = async (e) => {
 <Button
                     type="submit"
                     variant="primary"
-                    loading={loading}
-                    disabled={!content.replace(/<[^>]*>/g, '').trim()}
+                    loading={loading || processingVideo}
+                    disabled={!content.replace(/<[^>]*>/g, '').trim() || processingVideo}
                   >
-                    Post
+                    {processingVideo ? 'Processing...' : 'Post'}
                   </Button>
                 </div>
               </form>

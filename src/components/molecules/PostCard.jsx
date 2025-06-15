@@ -159,7 +159,7 @@ const handleShare = async () => {
         />
       </div>
 
-      {/* Media */}
+{/* Media */}
       {post.mediaUrl && post.mediaType === 'image' && (
         <div className="mb-4 rounded-lg overflow-hidden">
           <img
@@ -168,6 +168,25 @@ const handleShare = async () => {
             className="w-full h-auto max-h-96 object-cover"
             loading="lazy"
           />
+        </div>
+      )}
+
+      {post.mediaUrl && post.mediaType === 'video' && (
+        <div className="mb-4 rounded-lg overflow-hidden relative">
+          <video
+            src={post.mediaUrl}
+            className="w-full h-auto max-h-96 object-cover"
+            controls
+            preload="metadata"
+            poster={post.thumbnailUrl}
+          >
+            Your browser does not support the video tag.
+          </video>
+          {post.videoDuration && (
+            <div className="absolute bottom-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
+              {Math.floor(post.videoDuration / 60)}:{String(Math.floor(post.videoDuration % 60)).padStart(2, '0')}
+            </div>
+          )}
         </div>
       )}
 
