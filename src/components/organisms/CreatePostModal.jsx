@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { toast } from 'react-toastify';
-import ApperIcon from '../ApperIcon';
-import Button from '../atoms/Button';
-import Avatar from '../atoms/Avatar';
-import Text from '../atoms/Text';
-import RichTextEditor from '../atoms/RichTextEditor';
-import { postService, userService } from '@/services';
-import { generateVideoThumbnail, validateVideoFile, formatDuration } from '@/utils/videoUtils';
-
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "react-toastify";
+import ApperIcon from "../ApperIcon";
+import Button from "../atoms/Button";
+import Avatar from "../atoms/Avatar";
+import Text from "../atoms/Text";
+import RichTextEditor from "../atoms/RichTextEditor";
+import EmojiPicker from "../atoms/EmojiPicker";
+import { postService, userService } from "@/services";
+import { formatDuration, generateVideoThumbnail, validateVideoFile } from "@/utils/videoUtils";
 const CreatePostModal = ({ isOpen, onClose }) => {
   const [content, setContent] = useState('');
   const [mediaFile, setMediaFile] = useState(null);
@@ -77,7 +77,7 @@ const handleMediaUpload = async (e) => {
       toast.error(error.message);
       setProcessingVideo(false);
     }
-  };
+};
 
   const removeMedia = () => {
     setMediaFile(null);
@@ -94,6 +94,13 @@ const handleMediaUpload = async (e) => {
     }
   };
 
+  const handleEmojiSelect = (emoji) => {
+    if (!emoji) return;
+    
+    // Insert emoji at the current cursor position or append to content
+    const emojiText = emoji.native || emoji;
+    setContent(prevContent => prevContent + emojiText);
+  };
 const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -138,145 +145,136 @@ const newPost = await postService.create({
 
   return (
     <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+    {isOpen && <>
+        <motion.div
+            initial={{
+                opacity: 0
+            }}
+            animate={{
+                opacity: 1
+            }}
+            exit={{
+                opacity: 0
+            }}
             className="fixed inset-0 bg-black/50 z-40"
-            onClick={onClose}
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          >
-            <div className="bg-surface rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
-              {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-700">
-                <Text variant="subheading" className="text-white">
-                  Create Post
-                </Text>
-                <button
-                  onClick={onClose}
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <ApperIcon name="X" size={24} />
-                </button>
-              </div>
-
-              {/* Content */}
-              <form onSubmit={handleSubmit} className="p-6">
-<div className="flex items-start space-x-4 mb-4">
-                  <Avatar 
-                    src={currentUser?.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'} 
-                    alt={currentUser?.displayName || 'User'} 
-                  />
-                  <div className="flex-1">
-                    <RichTextEditor
-                      value={content}
-                      onChange={setContent}
-                      placeholder="What's happening? Use #hashtags for topics!"
-                      maxLength={280}
-                      className="w-full"
-                    />
-                    <div className="text-right mt-2">
-                      <Text variant="caption" color="muted">
-                        {content.replace(/<[^>]*>/g, '').length}/280
-                      </Text>
-                    </div>
-                  </div>
+            onClick={onClose} />
+        <motion.div
+            initial={{
+                opacity: 0,
+                scale: 0.95
+            }}
+            animate={{
+                opacity: 1,
+                scale: 1
+            }}
+            exit={{
+                opacity: 0,
+                scale: 0.95
+            }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div
+                className="bg-surface rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+                {/* Header */}
+                <div
+                    className="flex items-center justify-between p-6 border-b border-gray-700">
+                    <Text variant="subheading" className="text-white">Create Post
+                                        </Text>
+                    <button
+                        onClick={onClose}
+                        className="text-gray-400 hover:text-white transition-colors">
+                        <ApperIcon name="X" size={24} />
+                    </button>
                 </div>
-
-{/* Media Preview */}
-                {processingVideo && (
-                  <div className="mb-4 p-4 bg-gray-800 rounded-lg">
-                    <div className="flex items-center space-x-3">
-                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
-                      <Text color="muted">Processing video and generating thumbnail...</Text>
-                    </div>
-                  </div>
-                )}
-                
-                {mediaPreview && !processingVideo && (
-                  <div className="relative mb-4 rounded-lg overflow-hidden">
-                    {mediaFile?.type.startsWith('video/') ? (
-                      <div className="relative">
-                        <video
-                          src={mediaPreview}
-                          className="w-full h-auto max-h-64 object-cover"
-                          controls
-                          preload="metadata"
-                        />
-                        <div className="absolute bottom-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
-                          {formatDuration(videoDuration)}
+                {/* Content */}
+                <form onSubmit={handleSubmit} className="p-6">
+                    <div className="flex items-start space-x-4 mb-4">
+                        <Avatar
+                            src={currentUser?.avatar || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"}
+                            alt={currentUser?.displayName || "User"} />
+                        <div className="flex-1">
+                            <RichTextEditor
+                                value={content}
+                                onChange={setContent}
+                                placeholder="What's happening? Use #hashtags for topics!"
+                                maxLength={280}
+                                className="w-full" />
+                            <div className="text-right mt-2">
+                                <Text variant="caption" color="muted">
+                                    {content.replace(/<[^>]*>/g, "").length}/280
+                                                          </Text>
+                            </div>
                         </div>
-                      </div>
-                    ) : (
-                      <img
-                        src={mediaPreview}
-                        alt="Media preview"
-                        className="w-full h-auto max-h-64 object-cover"
-                      />
-                    )}
-                    <button
-                      type="button"
-                      onClick={removeMedia}
-                      className="absolute top-2 right-2 bg-black/50 rounded-full p-1 hover:bg-black/70 transition-colors"
-                    >
-                      <ApperIcon name="X" size={16} className="text-white" />
-                    </button>
-                  </div>
-                )}
-
-                {/* Actions */}
-<div className="flex items-center justify-between pt-4 border-t border-gray-700">
-                  <div className="flex items-center space-x-4">
-                    <label className="text-gray-400 hover:text-white transition-colors cursor-pointer" title="Upload Image">
-                      <ApperIcon name="Image" size={20} />
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleMediaUpload}
-                        className="hidden"
-                        disabled={processingVideo}
-                      />
-                    </label>
-                    <label className="text-gray-400 hover:text-white transition-colors cursor-pointer" title="Upload Video">
-                      <ApperIcon name="Video" size={20} />
-                      <input
-                        type="file"
-                        accept="video/mp4,video/webm,video/ogg,video/quicktime"
-                        onChange={handleMediaUpload}
-                        className="hidden"
-                        disabled={processingVideo}
-                      />
-                    </label>
-                    <button
-                      type="button"
-                      className="text-gray-400 hover:text-white transition-colors"
-                    >
-                      <ApperIcon name="Smile" size={20} />
-                    </button>
-                  </div>
-
-<Button
-                    type="submit"
-                    variant="primary"
-                    loading={loading || processingVideo}
-                    disabled={!content.replace(/<[^>]*>/g, '').trim() || processingVideo}
-                  >
-                    {processingVideo ? 'Processing...' : 'Post'}
-                  </Button>
-                </div>
-              </form>
+                    </div>
+                    {/* Media Preview */}
+                    {processingVideo && <div className="mb-4 p-4 bg-gray-800 rounded-lg">
+                        <div className="flex items-center space-x-3">
+                            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
+                            <Text color="muted">Processing video and generating thumbnail...</Text>
+                        </div>
+                    </div>}
+                    {mediaPreview && !processingVideo && <div className="relative mb-4 rounded-lg overflow-hidden">
+                        {mediaFile?.type.startsWith("video/") ? <div className="relative">
+                            <video
+                                src={mediaPreview}
+                                className="w-full h-auto max-h-64 object-cover"
+                                controls
+                                preload="metadata" />
+                            <div
+                                className="absolute bottom-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
+                                {formatDuration(videoDuration)}
+                            </div>
+                        </div> : <img
+                            src={mediaPreview}
+                            alt="Media preview"
+                            className="w-full h-auto max-h-64 object-cover" />}
+                        <button
+                            type="button"
+                            onClick={removeMedia}
+                            className="absolute top-2 right-2 bg-black/50 rounded-full p-1 hover:bg-black/70 transition-colors">
+                            <ApperIcon name="X" size={16} className="text-white" />
+                        </button>
+                    </div>}
+                    {/* Actions */}
+                    <div
+                        className="flex items-center justify-between pt-4 border-t border-gray-700">
+                        <div className="flex items-center space-x-4">
+                            <label
+                                className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+                                title="Upload Image">
+                                <ApperIcon name="Image" size={20} />
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleMediaUpload}
+                                    className="hidden"
+                                    disabled={processingVideo} />
+                            </label>
+                            <label
+                                className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+                                title="Upload Video">
+                                <ApperIcon name="Video" size={20} />
+                                <input
+                                    type="file"
+                                    accept="video/mp4,video/webm,video/ogg,video/quicktime"
+                                    onChange={handleMediaUpload}
+                                    className="hidden"
+                                    disabled={processingVideo} />
+                            </label>
+                            <EmojiPicker onEmojiSelect={handleEmojiSelect} />
+                        </div>
+                        <Button
+                            type="submit"
+                            variant="primary"
+                            loading={loading || processingVideo}
+                            disabled={!content.replace(/<[^>]*>/g, "").trim() || processingVideo}>
+                            {processingVideo ? "Processing..." : "Post"}
+                        </Button>
+                    </div>
+                </form>
             </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+        </motion.div>
+    </>}
+</AnimatePresence>
   );
 };
 
