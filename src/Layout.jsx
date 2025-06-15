@@ -28,11 +28,11 @@ const Layout = () => {
             <NavLink
               key={route.id}
               to={route.path.replace(':username?', '')}
-              className={({ isActive }) =>
+className={({ isActive }) =>
                 `flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                   isActive
                     ? 'bg-gradient-to-r from-primary to-accent text-white'
-                    : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                    : 'text-gray-700 hover:bg-gray-800 hover:text-white'
                 }`
               }
             >
@@ -58,11 +58,11 @@ const Layout = () => {
             <NavLink
               key={route.id}
               to={route.path.replace(':username?', '')}
-              className={({ isActive }) =>
+className={({ isActive }) =>
                 `flex flex-col items-center space-y-1 px-3 py-2 rounded-lg transition-all duration-200 ${
                   isActive
                     ? 'text-primary'
-                    : 'text-gray-400 hover:text-white'
+                    : 'text-gray-600 hover:text-white'
                 }`
               }
             >
@@ -71,9 +71,9 @@ const Layout = () => {
             </NavLink>
           ))}
           
-          <button
+<button
             onClick={handleCreateClick}
-            className="flex flex-col items-center space-y-1 px-3 py-2 rounded-lg transition-all duration-200 text-gray-400 hover:text-white"
+            className="flex flex-col items-center space-y-1 px-3 py-2 rounded-lg transition-all duration-200 text-gray-600 hover:text-white"
           >
             <ApperIcon name="Plus" size={20} />
             <span className="text-xs font-medium">Create</span>
