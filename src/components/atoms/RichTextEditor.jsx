@@ -47,10 +47,10 @@ const RichTextEditor = forwardRef(({
 
   return (
     <div className="w-full rich-text-editor">
-      <style>
+<style>
         {`:root {
           --ql-editor-bg: transparent;
-          --ql-editor-color: white;
+          --ql-editor-color: #1F2937;
           --ql-placeholder-color: #9CA3AF;
           --ql-toolbar-border: #374151;
           --ql-icon-color: #9CA3AF;
