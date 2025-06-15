@@ -114,11 +114,17 @@ useEffect(() => {
         </button>
       </div>
 
-      {/* Content */}
+{/* Content */}
       <div className="mb-4">
-        <Text className="text-white leading-relaxed break-words">
-          {post.content}
-        </Text>
+        <div 
+          className="text-white leading-relaxed break-words prose prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ 
+            __html: post.content?.replace(
+              /#(\w+)/g, 
+              '<span class="text-accent font-semibold cursor-pointer hover:underline">#$1</span>'
+            ) || ''
+          }}
+        />
       </div>
 
       {/* Media */}

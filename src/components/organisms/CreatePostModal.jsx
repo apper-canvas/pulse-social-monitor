@@ -5,6 +5,7 @@ import ApperIcon from '../ApperIcon';
 import Button from '../atoms/Button';
 import Avatar from '../atoms/Avatar';
 import Text from '../atoms/Text';
+import RichTextEditor from '../atoms/RichTextEditor';
 import { postService, userService } from '@/services';
 
 const CreatePostModal = ({ isOpen, onClose }) => {
@@ -46,10 +47,13 @@ useEffect(() => {
     setMediaPreview('');
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!content.trim()) {
+    // Strip HTML tags for plain text validation
+    const plainTextContent = content.replace(/<[^>]*>/g, '').trim();
+    
+    if (!plainTextContent) {
       toast.error('Please enter some content');
       return;
     }
@@ -65,7 +69,7 @@ useEffect(() => {
 
       const newPost = await postService.create({
         userId: currentUser?.id || '1',
-        content: content.trim(),
+        content: content, // Store HTML content with formatting
         mediaUrl,
         mediaType: mediaFile ? 'image' : ''
       });
@@ -117,23 +121,22 @@ useEffect(() => {
 
               {/* Content */}
               <form onSubmit={handleSubmit} className="p-6">
-                <div className="flex items-start space-x-4 mb-4">
+<div className="flex items-start space-x-4 mb-4">
                   <Avatar 
                     src={currentUser?.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'} 
                     alt={currentUser?.displayName || 'User'} 
                   />
                   <div className="flex-1">
-                    <textarea
+                    <RichTextEditor
                       value={content}
-                      onChange={(e) => setContent(e.target.value)}
-                      placeholder="What's happening?"
-                      className="w-full bg-transparent text-white placeholder-gray-400 resize-none border-none outline-none text-xl"
-                      rows="4"
+                      onChange={setContent}
+                      placeholder="What's happening? Use #hashtags for topics!"
                       maxLength={280}
+                      className="w-full"
                     />
                     <div className="text-right mt-2">
                       <Text variant="caption" color="muted">
-                        {content.length}/280
+                        {content.replace(/<[^>]*>/g, '').length}/280
                       </Text>
                     </div>
                   </div>
@@ -177,11 +180,11 @@ useEffect(() => {
                     </button>
                   </div>
 
-                  <Button
+<Button
                     type="submit"
                     variant="primary"
                     loading={loading}
-                    disabled={!content.trim()}
+                    disabled={!content.replace(/<[^>]*>/g, '').trim()}
                   >
                     Post
                   </Button>
