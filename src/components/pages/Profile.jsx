@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import Avatar from '../atoms/Avatar';
 import Button from '../atoms/Button';
 import Text from '../atoms/Text';
+import Input from '../atoms/Input';
 import PostCard from '../molecules/PostCard';
 import ApperIcon from '../ApperIcon';
 import { userService, postService } from '@/services';
@@ -18,7 +19,14 @@ const Profile = () => {
   const [error, setError] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
-
+  const [isEditing, setIsEditing] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
+  const [editForm, setEditForm] = useState({
+    displayName: '',
+    username: '',
+    bio: ''
+  });
+  const [editErrors, setEditErrors] = useState({});
   useEffect(() => {
     const loadProfile = async () => {
       setLoading(true);
@@ -78,6 +86,88 @@ const Profile = () => {
       toast.error('Failed to update follow status');
     } finally {
       setFollowLoading(false);
+    }
+};
+
+  const handleEditStart = () => {
+    setIsEditing(true);
+    setEditForm({
+      displayName: user.displayName,
+      username: user.username,
+      bio: user.bio || ''
+    });
+    setEditErrors({});
+  };
+
+  const handleEditCancel = () => {
+    setIsEditing(false);
+    setEditForm({
+      displayName: '',
+      username: '',
+      bio: ''
+    });
+    setEditErrors({});
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    
+    if (!editForm.displayName.trim()) {
+      errors.displayName = 'Display name is required';
+    }
+    
+    if (!editForm.username.trim()) {
+      errors.username = 'Username is required';
+    } else if (!/^[a-zA-Z0-9_]+$/.test(editForm.username)) {
+      errors.username = 'Username can only contain letters, numbers, and underscores';
+    }
+    
+    if (editForm.bio && editForm.bio.length > 160) {
+      errors.bio = 'Bio must be 160 characters or less';
+    }
+    
+    return errors;
+  };
+
+  const handleEditSave = async () => {
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setEditErrors(errors);
+      return;
+    }
+
+    setEditLoading(true);
+    try {
+      const updatedUser = await userService.update(user.id, {
+        displayName: editForm.displayName.trim(),
+        username: editForm.username.trim(),
+        bio: editForm.bio.trim()
+      });
+      
+      setUser(updatedUser);
+      setIsEditing(false);
+      setEditErrors({});
+      toast.success('Profile updated successfully');
+    } catch (error) {
+      toast.error('Failed to update profile');
+      setEditErrors({ general: 'Failed to update profile. Please try again.' });
+    } finally {
+      setEditLoading(false);
+    }
+  };
+
+  const handleEditFormChange = (field, value) => {
+    setEditForm(prev => ({
+      ...prev,
+      [field]: value
+    }));
+    
+    // Clear field-specific error when user starts typing
+    if (editErrors[field]) {
+      setEditErrors(prev => ({
+        ...prev,
+        [field]: undefined
+      }));
     }
   };
 
@@ -144,34 +234,102 @@ const Profile = () => {
           animate={{ opacity: 1, y: 0 }}
           className="glass rounded-xl p-8 mb-8"
         >
-          <div className="flex items-start justify-between mb-6">
+<div className="flex items-start justify-between mb-6">
             <div className="flex items-center space-x-6">
               <Avatar src={user.avatar} alt={user.displayName} size="2xl" />
               <div className="flex-1">
-<Text variant="heading" size="xl" className="text-gray-900 mb-1">
-                  {user.displayName}
-                </Text>
-                <Text color="muted" className="mb-3">
-                  @{user.username}
-                </Text>
-                {user.bio && (
-<Text className="text-gray-900 leading-relaxed break-words">
-                    {user.bio}
-                  </Text>
+                {isEditing ? (
+                  <div className="space-y-4">
+                    {editErrors.general && (
+                      <Text className="text-error text-sm">
+                        {editErrors.general}
+                      </Text>
+                    )}
+                    <Input
+                      label="Display Name"
+                      value={editForm.displayName}
+                      onChange={(e) => handleEditFormChange('displayName', e.target.value)}
+                      error={editErrors.displayName}
+                      placeholder="Enter your display name"
+                    />
+                    <Input
+                      label="Username"
+                      value={editForm.username}
+                      onChange={(e) => handleEditFormChange('username', e.target.value)}
+                      error={editErrors.username}
+                      placeholder="Enter your username"
+                    />
+                    <Input
+                      label="Bio"
+                      value={editForm.bio}
+                      onChange={(e) => handleEditFormChange('bio', e.target.value)}
+                      error={editErrors.bio}
+                      placeholder="Tell us about yourself"
+                      type="textarea"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <Text variant="heading" size="xl" className="text-gray-900 mb-1">
+                      {user.displayName}
+                    </Text>
+                    <Text color="muted" className="mb-3">
+                      @{user.username}
+                    </Text>
+                    {user.bio && (
+                      <Text className="text-gray-900 leading-relaxed break-words">
+                        {user.bio}
+                      </Text>
+                    )}
+                  </>
                 )}
               </div>
             </div>
             
-            {username && (
-              <Button
-                variant={isFollowing ? 'secondary' : 'primary'}
-                onClick={handleFollow}
-                loading={followLoading}
-                icon={isFollowing ? 'UserMinus' : 'UserPlus'}
-              >
-                {isFollowing ? 'Following' : 'Follow'}
-              </Button>
-            )}
+            <div className="flex items-center space-x-3">
+              {!username && (
+                <div className="flex items-center space-x-2">
+                  {isEditing ? (
+                    <>
+                      <Button
+                        variant="ghost"
+                        onClick={handleEditCancel}
+                        disabled={editLoading}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        variant="primary"
+                        onClick={handleEditSave}
+                        loading={editLoading}
+                        icon="Check"
+                      >
+                        Save
+                      </Button>
+                    </>
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      onClick={handleEditStart}
+                      icon="Edit"
+                    >
+                      Edit Profile
+                    </Button>
+                  )}
+                </div>
+              )}
+              
+              {username && (
+                <Button
+                  variant={isFollowing ? 'secondary' : 'primary'}
+                  onClick={handleFollow}
+                  loading={followLoading}
+                  icon={isFollowing ? 'UserMinus' : 'UserPlus'}
+                >
+                  {isFollowing ? 'Following' : 'Follow'}
+                </Button>
+              )}
+            </div>
           </div>
 
           {/* Stats */}
