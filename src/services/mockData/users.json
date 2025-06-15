@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "username": "alexsmith",
+    "displayName": "Alex Smith",
+    "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    "bio": "Creative designer passionate about visual storytelling and modern aesthetics. Always exploring new ways to blend art with technology.",
+    "followersCount": 1247,
+    "followingCount": 892,
+    "postsCount": 156,
+    "createdAt": "2023-01-15T08:00:00Z"
+  },
+  {
+    "id": "2",
+    "username": "sarahwilson",
+    "displayName": "Sarah Wilson",
+    "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+    "bio": "Travel photographer capturing moments around the world 🌍 | Currently exploring Southeast Asia | Coffee enthusiast ☕",
+    "followersCount": 3421,
+    "followingCount": 567,
+    "postsCount": 289,
+    "createdAt": "2023-02-20T12:30:00Z"
+  },
+  {
+    "id": "3",
+    "username": "mikejohnson",
+    "displayName": "Mike Johnson",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    "bio": "Tech entrepreneur building the future of sustainable technology. Former Google engineer, now focusing on climate tech solutions.",
+    "followersCount": 892,
+    "followingCount": 445,
+    "postsCount": 78,
+    "createdAt": "2023-03-10T15:45:00Z"
+  },
+  {
+    "id": "4",
+    "username": "emilydavis",
+    "displayName": "Emily Davis",
+    "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    "bio": "Lifestyle blogger sharing daily inspiration and wellness tips. Yoga instructor and mindfulness advocate. Spreading positive vibes ✨",
+    "followersCount": 2156,
+    "followingCount": 1234,
+    "postsCount": 234,
+    "createdAt": "2023-04-05T09:20:00Z"
+  },
+  {
+    "id": "5",
+    "username": "davidbrown",
+    "displayName": "David Brown",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    "bio": "Professional chef sharing culinary adventures and recipes. James Beard Award nominee. Teaching cooking classes worldwide 👨‍🍳",
+    "followersCount": 4567,
+    "followingCount": 234,
+    "postsCount": 345,
+    "createdAt": "2023-01-28T11:15:00Z"
+  }
+]

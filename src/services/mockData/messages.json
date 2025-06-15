@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "senderId": "2",
+    "receiverId": "1",
+    "content": "Hey Alex! Loved your latest design work. Would love to collaborate on a project sometime.",
+    "read": true,
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "id": "2",
+    "senderId": "1",
+    "receiverId": "2",
+    "content": "Thanks Sarah! I'd love to work together. Your photography would be perfect for the brand project I'm working on.",
+    "read": true,
+    "createdAt": "2024-01-15T10:45:00Z"
+  },
+  {
+    "id": "3",
+    "senderId": "2",
+    "receiverId": "1",
+    "content": "That sounds amazing! Let's set up a call this week to discuss details.",
+    "read": false,
+    "createdAt": "2024-01-15T11:00:00Z"
+  },
+  {
+    "id": "4",
+    "senderId": "3",
+    "receiverId": "1",
+    "content": "Congratulations on the new design system! The attention to detail is incredible.",
+    "read": false,
+    "createdAt": "2024-01-15T16:20:00Z"
+  },
+  {
+    "id": "5",
+    "senderId": "4",
+    "receiverId": "2",
+    "content": "Your Bali photos are giving me serious wanderlust! Any recommendations for a first-time visitor?",
+    "read": true,
+    "createdAt": "2024-01-15T12:15:00Z"
+  },
+  {
+    "id": "6",
+    "senderId": "2",
+    "receiverId": "4",
+    "content": "Absolutely! Ubud is a must-visit for the cultural experience, and the Gili Islands are perfect for relaxation. I'll send you my detailed itinerary!",
+    "read": true,
+    "createdAt": "2024-01-15T12:30:00Z"
+  },
+  {
+    "id": "7",
+    "senderId": "5",
+    "receiverId": "3",
+    "content": "Saw your TechCrunch panel - fantastic insights on renewable energy! Would love to discuss potential partnerships.",
+    "read": false,
+    "createdAt": "2024-01-11T19:45:00Z"
+  },
+  {
+    "id": "8",
+    "senderId": "1",
+    "receiverId": "4",
+    "content": "Love your morning routine posts! They've inspired me to start incorporating meditation into my daily practice.",
+    "read": true,
+    "createdAt": "2024-01-14T08:30:00Z"
+  },
+  {
+    "id": "9",
+    "senderId": "4",
+    "receiverId": "1",
+    "content": "That's wonderful to hear! Starting small with just 5-10 minutes can make a huge difference. Let me know how it goes!",
+    "read": true,
+    "createdAt": "2024-01-14T09:00:00Z"
+  },
+  {
+    "id": "10",
+    "senderId": "3",
+    "receiverId": "5",
+    "content": "Your new restaurant concept sounds incredible! I'd love to feature it in our upcoming sustainability spotlight.",
+    "read": false,
+    "createdAt": "2024-01-12T14:20:00Z"
+  }
+]

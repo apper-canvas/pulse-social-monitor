@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "userId": "1",
+    "content": "Just finished working on a new design system for a client. The challenge was creating something that feels both modern and timeless. Sometimes the best solutions come from stripping away the unnecessary and focusing on what truly matters. What's your approach to creative problem-solving?",
+    "mediaUrl": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likeCount": 127,
+    "commentCount": 23,
+    "createdAt": "2024-01-15T14:30:00Z"
+  },
+  {
+    "id": "2",
+    "userId": "2",
+    "content": "Golden hour in Bali never gets old. There's something magical about the way light transforms everything it touches. This shot was taken at Tegallalang Rice Terraces, and I waited almost an hour for the perfect moment when the sun aligned with the terraces. Patience in photography always pays off! 🌅",
+    "mediaUrl": "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likeCount": 892,
+    "commentCount": 156,
+    "createdAt": "2024-01-15T08:45:00Z"
+  },
+  {
+    "id": "3",
+    "userId": "3",
+    "content": "Excited to share that our climate tech startup just secured Series A funding! We're building AI-powered solutions to optimize renewable energy distribution. The future of sustainable technology is here, and we're just getting started. Thank you to everyone who believed in our vision. 🌱⚡",
+    "mediaUrl": "",
+    "mediaType": "",
+    "likeCount": 234,
+    "commentCount": 67,
+    "createdAt": "2024-01-14T16:20:00Z"
+  },
+  {
+    "id": "4",
+    "userId": "4",
+    "content": "Morning yoga session complete! Started my day with 30 minutes of mindful movement and meditation. There's something powerful about connecting with your body and breath before the world wakes up. How do you start your mornings? Share your morning ritual below! 🧘‍♀️",
+    "mediaUrl": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likeCount": 456,
+    "commentCount": 89,
+    "createdAt": "2024-01-14T06:15:00Z"
+  },
+  {
+    "id": "5",
+    "userId": "5",
+    "content": "Tonight's special: Pan-seared duck breast with cherry gastrique and roasted root vegetables. The key to perfect duck is patience - let it render slowly and develop that beautiful crispy skin. Cooking is an art form that engages all the senses. What's your favorite dish to cook when you want to impress? 👨‍🍳",
+    "mediaUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likeCount": 678,
+    "commentCount": 234,
+    "createdAt": "2024-01-13T19:30:00Z"
+  },
+  {
+    "id": "6",
+    "userId": "1",
+    "content": "Working on a new brand identity for a sustainable fashion startup. The challenge is communicating environmental consciousness while maintaining luxury appeal. Sometimes the most impactful designs are the ones that tell a story without saying a word.",
+    "mediaUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likeCount": 89,
+    "commentCount": 12,
+    "createdAt": "2024-01-13T11:20:00Z"
+  },
+  {
+    "id": "7",
+    "userId": "2",
+    "content": "Street food adventures in Bangkok! This som tam (papaya salad) from a local vendor is absolutely incredible. The perfect balance of sweet, sour, salty, and spicy. Food photography tip: natural light is your best friend, but don't be afraid to use shadows to create depth and mood. 🌶️",
+    "mediaUrl": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likeCount": 723,
+    "commentCount": 98,
+    "createdAt": "2024-01-12T15:45:00Z"
+  },
+  {
+    "id": "8",
+    "userId": "4",
+    "content": "Reminder: Self-care isn't selfish, it's essential. Today I'm taking time to disconnect from screens, take a long bath, and read a good book. In our always-on world, we need to intentionally create space for rest and reflection. What does self-care look like for you? 💆‍♀️",
+    "mediaUrl": "",
+    "mediaType": "",
+    "likeCount": 512,
+    "commentCount": 76,
+    "createdAt": "2024-01-12T10:30:00Z"
+  },
+  {
+    "id": "9",
+    "userId": "5",
+    "content": "Behind the scenes at our new restaurant location! The kitchen is finally coming together, and I couldn't be more excited. We're focusing on locally sourced ingredients and zero-waste cooking techniques. Opening night is just three weeks away! 🍽️",
+    "mediaUrl": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likeCount": 445,
+    "commentCount": 87,
+    "createdAt": "2024-01-11T17:20:00Z"
+  },
+  {
+    "id": "10",
+    "userId": "3",
+    "content": "Just wrapped up an amazing panel discussion on the future of renewable energy at TechCrunch Disrupt. The innovation happening in this space is truly inspiring. We're moving from a world of scarcity to one of abundance - clean, sustainable abundance. The next decade will be transformative. 🔋",
+    "mediaUrl": "",
+    "mediaType": "",
+    "likeCount": 156,
+    "commentCount": 45,
+    "createdAt": "2024-01-11T14:15:00Z"
+  }
+]

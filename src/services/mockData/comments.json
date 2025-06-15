@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "postId": "1",
+    "userId": "3",
+    "content": "Love the minimalist approach! Sometimes less truly is more. Great work on the design system.",
+    "likeCount": 12,
+    "createdAt": "2024-01-15T15:30:00Z"
+  },
+  {
+    "id": "2",
+    "postId": "1",
+    "userId": "4",
+    "content": "Your design philosophy really resonates with me. I always try to remove the unnecessary and focus on the essence of what I'm creating.",
+    "likeCount": 8,
+    "createdAt": "2024-01-15T16:45:00Z"
+  },
+  {
+    "id": "3",
+    "postId": "2",
+    "userId": "1",
+    "content": "Absolutely stunning! The patience definitely paid off. The composition and lighting are perfect.",
+    "likeCount": 34,
+    "createdAt": "2024-01-15T09:20:00Z"
+  },
+  {
+    "id": "4",
+    "postId": "2",
+    "userId": "5",
+    "content": "This makes me want to book a flight to Bali right now! Your photography always captures the soul of a place.",
+    "likeCount": 23,
+    "createdAt": "2024-01-15T10:15:00Z"
+  },
+  {
+    "id": "5",
+    "postId": "3",
+    "userId": "2",
+    "content": "Congratulations! This is exactly the kind of innovation we need. Looking forward to seeing the impact your solutions will have.",
+    "likeCount": 19,
+    "createdAt": "2024-01-14T17:30:00Z"
+  },
+  {
+    "id": "6",
+    "postId": "4",
+    "userId": "3",
+    "content": "I start with 10 minutes of meditation and then review my goals for the day. Your morning routine sounds perfect!",
+    "likeCount": 15,
+    "createdAt": "2024-01-14T07:45:00Z"
+  },
+  {
+    "id": "7",
+    "postId": "5",
+    "userId": "1",
+    "content": "This looks absolutely incredible! Your plating skills are next level. I need to try making duck at home.",
+    "likeCount": 28,
+    "createdAt": "2024-01-13T20:15:00Z"
+  },
+  {
+    "id": "8",
+    "postId": "5",
+    "userId": "4",
+    "content": "The presentation is beautiful! I love how you combine traditional techniques with modern aesthetics.",
+    "likeCount": 17,
+    "createdAt": "2024-01-13T21:30:00Z"
+  },
+  {
+    "id": "9",
+    "postId": "7",
+    "userId": "3",
+    "content": "Your food photography is always so vibrant and appetizing! That som tam looks perfect.",
+    "likeCount": 22,
+    "createdAt": "2024-01-12T16:20:00Z"
+  },
+  {
+    "id": "10",
+    "postId": "8",
+    "userId": "2",
+    "content": "Such an important reminder! I love taking evening walks without my phone to clear my head.",
+    "likeCount": 31,
+    "createdAt": "2024-01-12T11:45:00Z"
+  }
+]

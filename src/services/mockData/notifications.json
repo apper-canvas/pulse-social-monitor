@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "userId": "1",
+    "type": "like",
+    "actorId": "2",
+    "entityId": "1",
+    "read": false,
+    "createdAt": "2024-01-15T16:30:00Z"
+  },
+  {
+    "id": "2",
+    "userId": "1",
+    "type": "comment",
+    "actorId": "3",
+    "entityId": "1",
+    "read": false,
+    "createdAt": "2024-01-15T15:30:00Z"
+  },
+  {
+    "id": "3",
+    "userId": "1",
+    "type": "follow",
+    "actorId": "4",
+    "entityId": "1",
+    "read": true,
+    "createdAt": "2024-01-15T14:20:00Z"
+  },
+  {
+    "id": "4",
+    "userId": "1",
+    "type": "message",
+    "actorId": "2",
+    "entityId": "3",
+    "read": false,
+    "createdAt": "2024-01-15T11:00:00Z"
+  },
+  {
+    "id": "5",
+    "userId": "2",
+    "type": "like",
+    "actorId": "1",
+    "entityId": "2",
+    "read": true,
+    "createdAt": "2024-01-15T09:20:00Z"
+  },
+  {
+    "id": "6",
+    "userId": "2",
+    "type": "comment",
+    "actorId": "5",
+    "entityId": "2",
+    "read": true,
+    "createdAt": "2024-01-15T10:15:00Z"
+  },
+  {
+    "id": "7",
+    "userId": "3",
+    "type": "like",
+    "actorId": "2",
+    "entityId": "3",
+    "read": false,
+    "createdAt": "2024-01-14T17:30:00Z"
+  },
+  {
+    "id": "8",
+    "userId": "4",
+    "type": "like",
+    "actorId": "3",
+    "entityId": "4",
+    "read": true,
+    "createdAt": "2024-01-14T07:45:00Z"
+  },
+  {
+    "id": "9",
+    "userId": "5",
+    "type": "comment",
+    "actorId": "1",
+    "entityId": "5",
+    "read": false,
+    "createdAt": "2024-01-13T20:15:00Z"
+  },
+  {
+    "id": "10",
+    "userId": "5",
+    "type": "follow",
+    "actorId": "4",
+    "entityId": "5",
+    "read": true,
+    "createdAt": "2024-01-13T18:30:00Z"
+  }
+]
