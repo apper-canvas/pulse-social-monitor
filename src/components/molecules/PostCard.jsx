@@ -81,24 +81,61 @@ const handleShare = async () => {
       }
     }
 
-    // Fallback to clipboard
+// Fallback to clipboard
     try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(window.location.href);
-        toast.success('Link copied to clipboard');
+      // Check if we have clipboard API and secure context
+      if (navigator.clipboard && navigator.clipboard.writeText && 
+          window.isSecureContext && document.hasFocus()) {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          toast.success('Link copied to clipboard');
+        } catch (clipboardError) {
+          // Handle clipboard-specific errors (permissions, blocked, etc.)
+          if (clipboardError.name === 'NotAllowedError') {
+            console.warn('Clipboard access denied, falling back to manual copy');
+            throw new Error('CLIPBOARD_DENIED');
+          } else {
+            console.warn('Clipboard API failed:', clipboardError);
+            throw new Error('CLIPBOARD_FAILED');
+          }
+        }
       } else {
-        // Final fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = window.location.href;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        toast.success('Link copied to clipboard');
+        // Use fallback if clipboard API not available or not in secure context
+        throw new Error('CLIPBOARD_UNAVAILABLE');
       }
     } catch (error) {
-      console.error('Failed to copy to clipboard:', error);
-      toast.error('Unable to share or copy link. Please copy the URL manually.');
+      // Handle all fallback scenarios
+      try {
+        // Final fallback for older browsers or when clipboard is blocked
+        const textArea = document.createElement('textarea');
+        textArea.value = window.location.href;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        if (successful) {
+          toast.success('Link copied to clipboard');
+        } else {
+          throw new Error('COPY_COMMAND_FAILED');
+        }
+      } catch (fallbackError) {
+        console.error('All clipboard methods failed:', error, fallbackError);
+        
+        // Provide specific user feedback based on error type
+        if (error.message === 'CLIPBOARD_DENIED') {
+          toast.error('Clipboard access blocked. Please copy the URL manually from your browser.');
+        } else if (!window.isSecureContext) {
+          toast.error('Copy feature requires secure connection (HTTPS). Please copy the URL manually.');
+        } else {
+          toast.error('Unable to copy link. Please copy the URL manually from your browser.');
+        }
+      }
     }
   };
 
