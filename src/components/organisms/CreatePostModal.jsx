@@ -180,8 +180,8 @@ className="flex items-center justify-between p-6 border-b border-gray-200">
 <Text variant="subheading" className="text-gray-900">Create Post
                                         </Text>
                     <button
-className="text-gray-400 hover:text-gray-600 transition-colors">
-                        className="text-gray-400 hover:text-white transition-colors">
+                        onClick={onClose}
+                        className="text-gray-400 hover:text-gray-600 transition-colors">
                         <ApperIcon name="X" size={24} />
                     </button>
                 </div>
