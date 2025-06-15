@@ -87,7 +87,7 @@ class PostService {
     return null;
   }
 
-  async search(query) {
+async search(query) {
     await delay(300);
     if (!query.trim()) return [];
     
@@ -99,6 +99,25 @@ class PostService {
       .slice(0, 20)
       .map(post => ({ ...post }));
   }
-}
+
+  async incrementCommentCount(id) {
+    await delay(200);
+    const post = this.posts.find(p => p.id === id);
+    if (post) {
+      post.commentCount = (post.commentCount || 0) + 1;
+      return { ...post };
+    }
+    return null;
+  }
+
+  async decrementCommentCount(id) {
+    await delay(200);
+    const post = this.posts.find(p => p.id === id);
+    if (post) {
+      post.commentCount = Math.max(0, (post.commentCount || 0) - 1);
+      return { ...post };
+    }
+    return null;
+  }
 
 export default new PostService();

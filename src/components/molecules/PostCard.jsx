@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import ApperIcon from '../ApperIcon';
 import Avatar from '../atoms/Avatar';
 import Text from '../atoms/Text';
+import CommentsList from './CommentsList';
 import { postService, userService } from '@/services';
 
 const PostCard = ({ post, onUpdate }) => {
@@ -270,10 +271,10 @@ const handleShare = async () => {
 
         <button className="text-gray-400 hover:text-white transition-colors">
           <ApperIcon name="Bookmark" size={20} />
-        </button>
+</button>
       </div>
 
-      {/* Comments section placeholder */}
+      {/* Comments section */}
       {showComments && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
@@ -281,9 +282,14 @@ const handleShare = async () => {
           exit={{ opacity: 0, height: 0 }}
           className="mt-4 pt-4 border-t border-gray-700"
         >
-          <Text color="muted" className="text-center">
-            Comments feature coming soon
-          </Text>
+          <CommentsList 
+            postId={post.id} 
+            onCommentCountChange={(newCount) => {
+              if (onUpdate) {
+                onUpdate({ ...post, commentCount: newCount });
+              }
+            }}
+          />
         </motion.div>
       )}
     </motion.div>
