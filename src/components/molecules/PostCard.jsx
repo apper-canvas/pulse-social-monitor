@@ -57,16 +57,48 @@ useEffect(() => {
     }
   };
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: `${user?.displayName}'s post`,
-        text: post.content,
-        url: window.location.href
-      });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      toast.success('Link copied to clipboard');
+const handleShare = async () => {
+    const shareData = {
+      title: `${user?.displayName || 'User'}'s post`,
+      text: post.content,
+      url: window.location.href
+    };
+
+    // Try native share first
+    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+      try {
+        await navigator.share(shareData);
+        toast.success('Post shared successfully');
+        return;
+      } catch (error) {
+        // Handle user cancellation silently, handle other errors
+        if (error.name !== 'AbortError') {
+          console.warn('Share failed:', error);
+          // Fall through to clipboard fallback
+        } else {
+          return; // User cancelled, don't show error
+        }
+      }
+    }
+
+    // Fallback to clipboard
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(window.location.href);
+        toast.success('Link copied to clipboard');
+      } else {
+        // Final fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = window.location.href;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        toast.success('Link copied to clipboard');
+      }
+    } catch (error) {
+      console.error('Failed to copy to clipboard:', error);
+      toast.error('Unable to share or copy link. Please copy the URL manually.');
     }
   };
 
