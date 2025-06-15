@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { formatDistanceToNow } from 'date-fns';
 import { toast } from 'react-toastify';
@@ -14,7 +14,7 @@ const PostCard = ({ post, onUpdate }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  React.useEffect(() => {
+useEffect(() => {
     const loadUser = async () => {
       try {
         const userData = await userService.getById(post.userId);
