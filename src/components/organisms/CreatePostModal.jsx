@@ -9,7 +9,7 @@ import RichTextEditor from "../atoms/RichTextEditor";
 import EmojiPicker from "../atoms/EmojiPicker";
 import { postService, userService } from "@/services";
 import { formatDuration, generateVideoThumbnail, validateVideoFile } from "@/utils/videoUtils";
-const CreatePostModal = ({ isOpen, onClose }) => {
+const CreatePostModal = ({ isOpen, onClose, onPostCreated }) => {
   const [content, setContent] = useState('');
   const [mediaFile, setMediaFile] = useState(null);
   const [mediaPreview, setMediaPreview] = useState('');
@@ -128,11 +128,16 @@ const newPost = await postService.create({
         mediaType: mediaFile ? (mediaFile.type.startsWith('video/') ? 'video' : 'image') : '',
         thumbnailUrl: videoThumbnail || '',
         videoDuration: videoDuration || 0
-      });
+});
 
       toast.success('Post created successfully!');
       
-// Reset form
+      // Notify parent component about new post
+      if (onPostCreated) {
+        onPostCreated(newPost);
+      }
+      
+      // Reset form
       setContent('');
       removeMedia(); // Use removeMedia to clean up URLs
       onClose();

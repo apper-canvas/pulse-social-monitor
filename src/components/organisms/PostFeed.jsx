@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { motion } from 'framer-motion';
 import PostCard from '../molecules/PostCard';
 import Text from '../atoms/Text';
 import ApperIcon from '../ApperIcon';
 import { postService } from '@/services';
 
-const PostFeed = ({ variant = 'home' }) => {
+const PostFeed = forwardRef(({ variant = 'home' }, ref) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -27,10 +27,31 @@ const PostFeed = ({ variant = 'home' }) => {
       } finally {
         setLoading(false);
       }
-    };
+};
 
     loadPosts();
   }, [variant]);
+
+  // Expose refresh function to parent components
+  useImperativeHandle(ref, () => ({
+    refreshPosts: async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        let result;
+        if (variant === 'trending') {
+          result = await postService.getTrending();
+        } else {
+          result = await postService.getAll();
+        }
+        setPosts(result);
+      } catch (err) {
+        setError(err.message || 'Failed to load posts');
+      } finally {
+        setLoading(false);
+      }
+    }
+  }), [variant]);
 
   const handlePostUpdate = (updatedPost) => {
     setPosts(posts.map(post => 
@@ -137,8 +158,10 @@ const PostFeed = ({ variant = 'home' }) => {
           <PostCard post={post} onUpdate={handlePostUpdate} />
         </motion.div>
       ))}
-    </motion.div>
+</motion.div>
   );
-};
+});
+
+PostFeed.displayName = 'PostFeed';
 
 export default PostFeed;
