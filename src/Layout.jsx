@@ -22,9 +22,8 @@ const Layout = () => {
             Pulse Social
           </h1>
         </div>
-        
-        <div className="space-y-2 flex-1">
-          {routeArray.map((route) => (
+<div className="space-y-2 flex-1">
+          {routeArray.filter(route => !route.hideFromNav).map((route) => (
             <NavLink
               key={route.id}
               to={route.path.replace(':username?', '')}
@@ -52,9 +51,9 @@ className={({ isActive }) =>
       </nav>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-gray-700 px-4 py-2 z-40">
+<nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-gray-700 px-4 py-2 z-40">
         <div className="flex justify-around items-center">
-          {routeArray.slice(0, 4).map((route) => (
+          {routeArray.filter(route => !route.hideFromNav).slice(0, 4).map((route) => (
             <NavLink
               key={route.id}
               to={route.path.replace(':username?', '')}
